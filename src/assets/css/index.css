@@ -1,0 +1,19 @@
+.user {
+  display: grid;
+  background-color: #ebedf0;
+  padding: 20px;
+  height: 100%;
+}
+
+.user-c {
+  width: 100%;
+  min-height: 400px;
+}
+
+.ever {
+  display: grid;
+}
+
+.font {
+  font-size: 30px;
+}

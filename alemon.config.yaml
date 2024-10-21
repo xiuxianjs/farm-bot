@@ -1,0 +1,10 @@
+pm2:
+  name: 'kook'
+  script: 'alemonjs start --input ./lib/index.js --login kook'
+
+# 机器人配置
+kook:
+  # 令牌
+  token: ''
+  # 主人
+  master_id: null
