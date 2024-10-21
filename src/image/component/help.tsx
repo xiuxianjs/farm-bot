@@ -1,7 +1,7 @@
 import { LinkStyleSheet } from 'jsxp'
 import React from 'react'
 import css_output from '@src/assets/main.css'
-import data from 'src/assets/defset/help.json'
+import data from 'src/assets/config/help.json'
 export default () => {
   return (
     <html>
@@ -10,11 +10,7 @@ export default () => {
       </head>
       <body>
         <div id="zoomable" className="help">
-          <div
-            style={{
-              height: '50px'
-            }}
-          />
+          <div className="h-12"></div>
           {data &&
             data.map(val => (
               <div key={val.group} className="cont-box">
