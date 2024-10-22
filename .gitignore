@@ -1,3 +1,11 @@
+# Node dependencies
 node_modules
-logs
-lib
+/data/
+/lib/
+/logs/
+*.log
+.env.*
+alemon*.env
+alemon*.yaml
+*.logs.ts
+yarn.lock
