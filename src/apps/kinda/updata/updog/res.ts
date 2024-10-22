@@ -6,9 +6,9 @@ export default OnResponse(
     if (!(await isThereAUserPresent(e, UID))) return
     const txt = useParse(e.Megs, 'Text')
     let dogname = txt.match(/(#|\/)?升级(狗狗)? ?(.*犬)/)
-    let dog: DB.UserDogType
+    let dog: any
     if (dogname && dogname[3]) {
-      let data: DB.UserDogType[] = (await DB.user_dog.findAll({
+      let data: any[] = (await DB.user_dog.findAll({
         where: { uid: UID },
         raw: true,
         include: [{ model: DB.goods }]
@@ -24,7 +24,7 @@ export default OnResponse(
         where: { uid: UID },
         raw: true,
         include: [{ model: DB.goods }]
-      })) as any as DB.UserDogType
+      })) as any
     }
     const Send = useSend(e)
     const msg = await GameApi.Leve.Up(UID, 3, 1, dog.id)

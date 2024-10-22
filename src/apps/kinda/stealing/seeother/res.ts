@@ -15,29 +15,31 @@ export default OnResponse(
     if (!(await victoryCooling(e, UID, CDID))) return
 
     // 随机 20 个玩家
-    const uData: DB.UserType[] = (await DB.user.findAll({
-      where: {
-        uid: {
-          // 不能是自己的
-          [DB.Op.ne]: UID
-        }
-      },
-      order: DB.literal('RAND()'),
-      // 20 个随机玩家
-      limit: 20,
-      raw: true
-    })) as any
+    const uData = await DB.user
+      .findAll({
+        where: {
+          uid: {
+            // 不能是自己的
+            [DB.Op.ne]: UID
+          }
+        },
+        order: DB.literal('RAND()'),
+        // 20 个随机玩家
+        limit: 20
+      })
+      .then(res => res.map(item => item.dataValues))
 
     // 压缩uid
     const data: string[] = uData.map(item => item.uid)
 
-    const fData: DB.UserFarmlandType[] = (await DB.user_farmland.findAll({
-      where: {
-        uid: data,
-        state: 1 // 所有状态为
-      },
-      raw: true
-    })) as any
+    const fData = await DB.user_farmland
+      .findAll({
+        where: {
+          uid: data,
+          state: 1 // 所有状态为
+        }
+      })
+      .then(res => res.map(item => item.dataValues))
 
     // 压缩uid
     const uidList = [...new Set(fData.map(item => item.uid))]

@@ -13,7 +13,7 @@ export default OnResponse(
 
     const ID = Number(txt.replace(/(#|\/)?(农田|农场)信息/, ''))
 
-    const uData: DB.UserType = await DB.user
+    const uData = await DB.user
       .findOne({
         where: {
           id: ID
@@ -33,14 +33,14 @@ export default OnResponse(
     }
 
     // 我的农场
-    const farmNum: DB.UserFarmlandType[] = (await DB.user_farmland.findAll({
+    const farmNum: any[] = await DB.user_farmland.findAll({
       where: { uid: uData.uid },
       raw: true,
       include: [
         { model: DB.goods, as: 'goods_gid' },
         { model: DB.goods, as: 'goods_tid' }
       ]
-    })) as any
+    })
 
     // 记录
     const log = ['偷菜标记:' + ID]

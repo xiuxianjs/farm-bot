@@ -3,7 +3,7 @@ import { Text, useSend } from 'alemonjs'
 export default OnResponse(
   async e => {
     const UID = e.UserId
-    const UserData: DB.UserType = await DB.user
+    const UserData = await DB.user
       .findOne({
         attributes: ['uid'],
         where: {
@@ -11,16 +11,13 @@ export default OnResponse(
         }
       })
       .then(data => data.dataValues)
-
     const Send = useSend(e)
-
     if (UserData) {
       Send(
         Text([`已建立家园`, `————————————`, '[@机器人 /我的信息]'].join('\n'))
       )
       return
     }
-
     return
   },
   'message.create',

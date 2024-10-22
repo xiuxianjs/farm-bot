@@ -4,11 +4,11 @@ export default OnResponse(
   async e => {
     const uid = e.UserId
     if (!(await isThereAUserPresent(e, uid))) return
-    const uData: DB.UserSignType = (await DB.user_sign.findOne({
+    const uData: any = await DB.user_sign.findOne({
       where: { uid },
       include: [{ model: DB.user }],
       raw: true
-    })) as any
+    })
 
     const Send = useSend(e)
 

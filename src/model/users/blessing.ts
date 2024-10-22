@@ -1,18 +1,11 @@
-import {
-  UserBagType,
-  UserHomeType,
-  goods,
-  user,
-  user_bag,
-  user_home
-} from '@src/db/index'
+import { goods, user, user_bag, user_home } from '@src/db/index'
 /**
  * 读取用户所有数据
  * @param UID
  * @returns
  */
 export async function read(UID: string) {
-  const data: UserHomeType = (await user_home.findOne({
+  const data = (await user_home.findOne({
     where: {
       uid: UID
     },
@@ -26,7 +19,7 @@ export async function read(UID: string) {
  * 读取背包所有数据
  */
 export async function readbag(UID: string) {
-  const data: UserBagType = (await user_bag.findAll({
+  const data = (await user_bag.findAll({
     where: {
       uid: UID
     },

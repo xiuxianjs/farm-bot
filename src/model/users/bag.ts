@@ -1,4 +1,4 @@
-import { type UserBagType, user_bag } from '@src/db/index.js'
+import { user_bag } from '@src/db/index.js'
 import { bagSize } from '../config/index.js'
 
 /**
@@ -47,7 +47,7 @@ export async function addBagThing(
     if (length >= grade * bagSize) break
 
     // 查找物品
-    const existingItem: UserBagType = await user_bag
+    const existingItem = await user_bag
       .findOne({
         where: { uid, name, typing, sell }
       })
@@ -86,14 +86,15 @@ export async function reduceBagThing(
   sell: number = 1
 ) {
   for (const { name, acount } of arr) {
-    const data: UserBagType | null = (await user_bag.findOne({
-      where: {
-        uid: UID,
-        name,
-        sell
-      },
-      raw: true
-    })) as any
+    const data = await user_bag
+      .findOne({
+        where: {
+          uid: UID,
+          name,
+          sell
+        }
+      })
+      .then(res => res.dataValues)
     // 不存在该物品
     if (!data) continue
     // 计算

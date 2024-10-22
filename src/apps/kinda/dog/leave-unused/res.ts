@@ -7,7 +7,7 @@ export default OnResponse(
 
     const Send = useSend(e)
 
-    let dogs: DB.UserDogType[] = (await DB.user_dog.findAll({
+    let dogs: any[] = (await DB.user_dog.findAll({
       where: { uid: UID },
       raw: true,
       include: [

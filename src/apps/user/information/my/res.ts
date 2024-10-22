@@ -4,13 +4,13 @@ export default OnResponse(
   async e => {
     const UID = e.UserId
     if (!(await isThereAUserPresent(e, UID))) return
-    const Userdata: DB.UserHomeType = (await DB.user_home.findOne({
+    const Userdata: any = await DB.user_home.findOne({
       where: {
         uid: UID
       },
       include: [{ model: DB.user }],
       raw: true
-    })) as any
+    })
 
     const Send = useSend(e)
 

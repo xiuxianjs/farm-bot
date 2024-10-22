@@ -1,7 +1,7 @@
 import { getConfig } from 'alemonjs'
 import { Sequelize } from 'sequelize'
 const config = getConfig()
-const db = config.value.db
+const db = config.value.db3
 export const sequelize = new Sequelize(db?.database, db?.user, db?.password, {
   host: db?.host,
   port: Number(db?.port),

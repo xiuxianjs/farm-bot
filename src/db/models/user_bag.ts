@@ -3,7 +3,24 @@ import { DataTypes, ModelStatic, Model } from 'sequelize'
 /**
  * 用户背包
  */
-export const user_bag = <ModelStatic<Model<UserBagType>>>sequelize.define(
+export const user_bag = <
+  ModelStatic<
+    Model<{
+      // 编号
+      id: number
+      // 用户id
+      uid: string
+      // 物品类型id
+      typing: number
+      // 物品名
+      name: string
+      // 物品出售价格
+      sell: number
+      // 物品数量
+      acount: number
+    }>
+  >
+>sequelize.define(
   'user_bag',
   {
     id: {
@@ -18,11 +35,3 @@ export const user_bag = <ModelStatic<Model<UserBagType>>>sequelize.define(
   },
   TableConfig
 )
-export interface UserBagType {
-  id: number
-  uid: string
-  typing: number
-  name: string
-  sell: number
-  acount: number
-}

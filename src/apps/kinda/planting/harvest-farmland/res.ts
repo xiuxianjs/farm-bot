@@ -6,7 +6,7 @@ export default OnResponse(
     const UID = e.UserId
     if (!(await isThereAUserPresent(e, UID))) return
 
-    const uData: DB.UserHomeType = await DB.user_home
+    const uData = await DB.user_home
       .findOne({
         where: {
           uid: UID
@@ -15,14 +15,14 @@ export default OnResponse(
       .then(data => data.dataValues)
 
     // 我的农场
-    const farmNum: DB.UserFarmlandType[] = (await DB.user_farmland.findAll({
+    const farmNum: any[] = await DB.user_farmland.findAll({
       where: { uid: UID },
       raw: true,
       include: [
         { model: DB.goods, as: 'goods_gid' },
         { model: DB.goods, as: 'goods_tid' }
       ]
-    })) as any
+    })
 
     // 记录
     const log = []
@@ -129,7 +129,7 @@ export default OnResponse(
 
     if (exp > 0) {
       // 增加用户经验
-      const uData: DB.UserType = await DB.user
+      const uData = await DB.user
         .findOne({
           where: {
             uid: UID

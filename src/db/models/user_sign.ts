@@ -3,7 +3,24 @@ import { DataTypes, ModelStatic, Model } from 'sequelize'
 /**
  * 用户签到表
  */
-export const user_sign = <ModelStatic<Model<UserSignType>>>sequelize.define(
+export const user_sign = <
+  ModelStatic<
+    Model<{
+      // 编号
+      id: number
+      // 用户id
+      uid: string
+      // 连续签到天数
+      continuous: number
+      // 今日签到天数
+      day: number
+      // 今日签到月
+      math: number
+      // 最后一次签到时间
+      updateAt: string
+    }>
+  >
+>sequelize.define(
   'user_sign',
   {
     id: {
@@ -18,11 +35,3 @@ export const user_sign = <ModelStatic<Model<UserSignType>>>sequelize.define(
   },
   TableConfig
 )
-export interface UserSignType {
-  id: number
-  uid: string
-  continuous: number
-  day: number
-  math: number
-  updateAt: string
-}

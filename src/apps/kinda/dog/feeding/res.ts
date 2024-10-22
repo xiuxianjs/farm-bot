@@ -7,7 +7,7 @@ export default OnResponse(
 
     const Send = useSend(e)
 
-    let dogs: DB.UserDogType[] = (await DB.user_dog.findAll({
+    let dogs = (await DB.user_dog.findAll({
       where: { uid: UID },
       raw: true,
       include: [
@@ -52,7 +52,7 @@ export default OnResponse(
       return
     }
 
-    const bags: DB.UserBagType[] = (await DB.user_bag.findAll({
+    const bags = (await DB.user_bag.findAll({
       where: {
         uid: UID,
         typing: 4,

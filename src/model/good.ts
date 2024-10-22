@@ -1,4 +1,4 @@
-import { goods, type GoodsType, literal, UserBagType } from '@src/db/index'
+import { goods, literal } from '@src/db/index'
 import { WhereOptions } from 'sequelize'
 
 /**
@@ -6,25 +6,25 @@ import { WhereOptions } from 'sequelize'
  */
 const map = {
   //  0 种子
-  0: (item: GoodsType, name: string) => {
+  0: (item, name: string) => {
     return `🔶种子[${item.name}]${name}${item.price}\n(成熟:${Math.floor(
       item.time / 1000 / 60
     )}分|周期:${Math.floor(item.cycle / 1000 / 60)}分|经验:${item.buff})`
   },
   // 土壤
-  1: (item: GoodsType, name: string) => {
+  1: (item, name: string) => {
     return `🔶土壤[${item.name}]${name}${item.price}\n(耐干旱:${Math.floor(
       item.buff / 1000 / 60
     )}分)`
   },
   // 狗狗
-  3: (item: GoodsType, name: string) => {
+  3: (item, name: string) => {
     return `🔶狗狗[${item.name}]${name}${item.price}\n(最饱度:${Math.floor(
       item.time / 1000 / 60
     )}分|防偷资质:${item.buff})`
   },
   // 狗粮
-  4: (item: GoodsType, name: string) => {
+  4: (item, name: string) => {
     return `🔶狗粮[${item.name}]${name}${item.price}\n(喂饱度:${Math.floor(
       item.time / 1000 / 60
     )}分)`
@@ -36,19 +36,19 @@ const map = {
  */
 const mapByUser = {
   //  0 成熟物
-  0: (item: UserBagType, name: string) => {
+  0: (item, name: string) => {
     return `🔶作物[${item.name}]${name}${item['good.selling_price']}\n(数量:${item.acount})`
   },
   // 土壤
-  1: (item: UserBagType, name: string) => {
+  1: (item, name: string) => {
     return `🔶土壤[${item.name}]${name}${item['good.selling_price']}\n(数量:${item.acount})`
   },
   // 狗狗
-  3: (item: UserBagType, name: string) => {
+  3: (item, name: string) => {
     return `🔶狗狗[${item.name}]${name}${item['good.selling_price']}\n(数量:${item.acount})`
   },
   // 狗粮
-  4: (item: UserBagType, name: string) => {
+  4: (item, name: string) => {
     return `🔶狗粮[${item.name}]${name}${item['good.selling_price']}\n(数量:${item.acount})`
   }
 }
@@ -59,7 +59,7 @@ const mapByUser = {
  * @param param1
  * @returns
  */
-export function getListMsg(list: GoodsType[], name = '￥') {
+export function getListMsg(list: any[], name = '￥') {
   // 存储转换
   const msg: string[] = []
   // 循环转换
@@ -77,7 +77,7 @@ export function getListMsg(list: GoodsType[], name = '￥') {
  * @param param1
  * @returns
  */
-export function getListMsgByUser(list: UserBagType[], name = '￥') {
+export function getListMsgByUser(list: any[], name = '￥') {
   // 存储转换
   const msg: string[] = []
   // 循环转换
@@ -94,8 +94,8 @@ export function getListMsgByUser(list: UserBagType[], name = '￥') {
  * @param where
  * @returns
  */
-export async function getRandomThing(where: WhereOptions<GoodsType>) {
-  const data: GoodsType | null = await goods
+export async function getRandomThing(where: WhereOptions<any>) {
+  const data = await goods
     .findOne({
       where,
       // 进行随机排序
@@ -111,7 +111,7 @@ export async function getRandomThing(where: WhereOptions<GoodsType>) {
  * @returns
  */
 export async function searchAllThing(name: string) {
-  const da: GoodsType = await goods
+  const da = await goods
     .findOne({
       where: {
         name

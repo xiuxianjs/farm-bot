@@ -7,7 +7,7 @@ export default OnResponse(
     if (!(await isThereAUserPresent(e, UID))) return
 
     // 如果身上没钱  直接被对方赶出门
-    const AData: DB.UserType = await DB.user
+    const AData = await DB.user
       .findOne({
         where: {
           uid: UID
@@ -27,7 +27,7 @@ export default OnResponse(
 
     const ID = Number(txt.replace(/(#|\/)?偷菜/, ''))
 
-    const BData: DB.UserType = await DB.user
+    const BData = await DB.user
       .findOne({
         where: {
           id: ID
@@ -51,7 +51,7 @@ export default OnResponse(
     // 设置冷却
     GameApi.Burial.set(UID, CDID)
 
-    const gData: DB.UserDogType = await DB.user_dog
+    const gData = await DB.user_dog
       .findOne({
         where: {
           uid: BData.uid,
@@ -81,14 +81,14 @@ export default OnResponse(
     }
 
     // 他的农场
-    const farmNum: DB.UserFarmlandType[] = (await DB.user_farmland.findAll({
+    const farmNum: any[] = await DB.user_farmland.findAll({
       where: { uid: BData.uid },
       raw: true,
       include: [
         { model: DB.goods, as: 'goods_gid' },
         { model: DB.goods, as: 'goods_tid' }
       ]
-    })) as any
+    })
 
     // 记录
     const log = []

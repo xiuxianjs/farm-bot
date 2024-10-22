@@ -11,7 +11,7 @@ export default OnResponse(
 
     if (name == '无') return
 
-    const farmland: DB.UserFarmlandType = await DB.user_farmland
+    const farmland = await DB.user_farmland
       .findOne({
         where: { uid, tid: 1 }
       })
@@ -24,7 +24,7 @@ export default OnResponse(
       return
     }
 
-    const dataId: DB.UserBagType = (await DB.user_bag.findOne({
+    const dataId = (await DB.user_bag.findOne({
       where: { name, uid, sell: 0 },
       include: [{ model: DB.goods }],
       raw: true

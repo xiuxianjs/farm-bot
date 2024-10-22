@@ -5,7 +5,7 @@ export default OnResponse(
     const uid = e.UserId
     if (!(await isThereAUserPresent(e, uid))) return
 
-    const bagData: DB.UserBagType[] = (await DB.user_bag.findAll({
+    const bagData: any[] = await DB.user_bag.findAll({
       where: { uid },
       include: [
         {
@@ -13,7 +13,7 @@ export default OnResponse(
         }
       ],
       raw: true
-    })) as any
+    })
 
     const Send = useSend(e)
 

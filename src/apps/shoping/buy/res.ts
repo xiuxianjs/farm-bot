@@ -5,7 +5,7 @@ export default OnResponse(
     const UID = e.UserId
     if (!(await isThereAUserPresent(e, UID))) return
 
-    const uData: DB.UserHomeType = await DB.user_home
+    const uData = await DB.user_home
       .findOne({
         where: {
           uid: UID
@@ -40,13 +40,13 @@ export default OnResponse(
       return
     }
 
-    const user: DB.UserHomeType = (await DB.user_home.findOne({
+    const user: any = await DB.user_home.findOne({
       where: {
         uid: UID
       },
       include: [{ model: DB.user }],
       raw: true
-    })) as any
+    })
 
     // 狗子要到狗子表
     if (findgoood.typing == 3) {
@@ -55,10 +55,10 @@ export default OnResponse(
         return
       }
       // 找到狗子
-      const dogs: DB.UserDogType = (await DB.user_dog.findOne({
+      const dogs: any = await DB.user_dog.findOne({
         where: { uid: UID, gid: findgoood.id },
         raw: true
-      })) as any
+      })
       if (!dogs) {
         const now = new Date().getTime()
         await DB.user_dog.create({
@@ -90,7 +90,7 @@ export default OnResponse(
 
     if (findgoood.typing == 1) {
       // 查看自身等级
-      const userData: DB.UserType = (await DB.user.findOne({
+      const userData: any = await DB.user.findOne({
         where: {
           uid: UID
         },
@@ -100,7 +100,7 @@ export default OnResponse(
           }
         ],
         raw: true
-      })) as any
+      })
 
       const size = userData['level.buff']
       // 看看目前多少块田

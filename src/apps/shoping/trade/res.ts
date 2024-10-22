@@ -12,7 +12,7 @@ export default OnResponse(
 
     const thing_shu: number = Number(acount) || 1 //数量
 
-    const uData: DB.UserType = await DB.user
+    const uData = await DB.user
       .findOne({
         where: {
           uid: UID
@@ -28,11 +28,11 @@ export default OnResponse(
       return
     }
 
-    const bagdata: DB.UserBagType = (await DB.user_bag.findOne({
+    const bagdata: any = await DB.user_bag.findOne({
       where: { uid: UID, name: name, sell: 1 },
       include: [{ model: DB.goods }],
       raw: true
-    })) as any
+    })
 
     if (bagdata.acount < thing_shu) {
       Send(Text(`${name}数量不足`))

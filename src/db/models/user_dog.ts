@@ -3,7 +3,28 @@ import { DataTypes, ModelStatic, Model } from 'sequelize'
 /**
  * 用户狗狗培养表
  */
-export const user_dog = <ModelStatic<Model<UserDogType>>>sequelize.define(
+export const user_dog = <
+  ModelStatic<
+    Model<{
+      // 编号
+      id: number
+      // 用户编号
+      uid: string
+      // 物品外键
+      gid: number
+      // 累计经验
+      exp: number
+      // 等级
+      grade: number
+      // 投喂时间
+      startAt: number
+      // 饥饿时间
+      endAt: number
+      // 是否被放置
+      state: number
+    }>
+  >
+>sequelize.define(
   'user_dog',
   {
     id: {
@@ -14,19 +35,9 @@ export const user_dog = <ModelStatic<Model<UserDogType>>>sequelize.define(
     gid: DataTypes.INTEGER, // bigint
     exp: DataTypes.INTEGER, // bigint
     grade: DataTypes.INET, // int
-    startAt: DataTypes.INTEGER, // 投喂时间
-    endAt: DataTypes.INTEGER, // 饥饿时间
-    state: DataTypes.INET // 是否被放置
+    startAt: DataTypes.INTEGER, // bigint
+    endAt: DataTypes.INTEGER, // bigint
+    state: DataTypes.INET // int
   },
   TableConfig
 )
-export interface UserDogType {
-  id: number
-  uid: string //编号
-  gid: number // 物品外键
-  exp: number // 累计经验
-  grade: number // 等级
-  startAt: number // 投喂时间
-  endAt: number // 饥饿时间
-  state: number // 是否被放置
-}

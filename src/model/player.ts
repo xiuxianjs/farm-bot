@@ -10,7 +10,6 @@ import { Anyarray } from './wrap/method'
  */
 export async function setPlayer(
   UID: string,
-  pid: string,
   user_avatar: string,
   name?: string
 ) {
@@ -34,7 +33,6 @@ export async function setPlayer(
           '戌',
           '亥'
         ]), // 道号
-    pid: pid,
     avatar: user_avatar, // 头像地址
     autograph: '无', // 签名
     phone: 999999, // 手机号

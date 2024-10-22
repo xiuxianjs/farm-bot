@@ -1,22 +1,11 @@
-import {
-  levels,
-  type LevelsType,
-  user,
-  type UserType,
-  user_home,
-  type UserHomeType,
-  user_farmland,
-  type UserFarmlandType,
-  user_dog,
-  type UserDogType
-} from '../db/index'
+import { levels, user, user_home, user_farmland, user_dog } from '../db/index'
 
 /**
  * 查看指定类型境界
  * @param typing
  * @returns
  */
-export async function Search(typing: number): Promise<LevelsType[]> {
+export async function Search(typing: number): Promise<any[]> {
   return (await levels.findAll({
     where: {
       typing
@@ -35,7 +24,7 @@ export async function Search(typing: number): Promise<LevelsType[]> {
 export async function SearchByGrade(
   typing: number,
   grade: number
-): Promise<LevelsType[]> {
+): Promise<any[]> {
   return (await levels.findAll({
     where: {
       typing,
@@ -53,7 +42,7 @@ export async function SearchByGrade(
  */
 export const LevelsMap = {
   0: async (uid: string, size: number) => {
-    const data: UserType = (await user.findOne({
+    const data = (await user.findOne({
       where: {
         uid
       },
@@ -90,7 +79,7 @@ export const LevelsMap = {
     return '升级成功'
   },
   1: async (uid: string, size: number) => {
-    const data: UserHomeType = (await user_home.findOne({
+    const data = (await user_home.findOne({
       where: {
         uid
       },
@@ -114,7 +103,7 @@ export const LevelsMap = {
     /**
      * **********************
      */
-    const uData: UserType = await user
+    const uData = await user
       .findOne({
         where: {
           uid
@@ -151,7 +140,7 @@ export const LevelsMap = {
     return '升级成功'
   },
   2: async (uid: string, size: number, id: number) => {
-    const data: UserFarmlandType = (await user_farmland.findOne({
+    const data = (await user_farmland.findOne({
       where: {
         uid,
         id: id
@@ -177,7 +166,7 @@ export const LevelsMap = {
     /**
      * **********************
      */
-    const uData: UserType = await user
+    const uData = await user
       .findOne({
         where: {
           uid
@@ -214,7 +203,7 @@ export const LevelsMap = {
     return '升级成功'
   },
   3: async (uid: string, size: number, id: number) => {
-    const data: UserDogType = (await user_dog.findOne({
+    const data = (await user_dog.findOne({
       where: {
         uid,
         id: id
@@ -241,7 +230,7 @@ export const LevelsMap = {
     /**
      * **********************
      */
-    const uData: UserType = await user
+    const uData = await user
       .findOne({
         where: {
           uid

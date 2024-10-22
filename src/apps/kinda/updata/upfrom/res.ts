@@ -5,9 +5,7 @@ export default OnResponse(
     const UID = e.UserId
     if (!(await isThereAUserPresent(e, UID))) return
     const Send = useSend(e)
-
     const txt = useParse(e.Megs, 'Text')
-
     const msg = await GameApi.Leve.Up(
       UID,
       2,
@@ -15,7 +13,6 @@ export default OnResponse(
       Number(txt.replace(/(#|\/)?升级农田/, ''))
     )
     Send(Text(msg))
-
     return
   },
   'message.create',

@@ -7,7 +7,7 @@ export default OnResponse(
 
     const txt = useParse(e.Megs, 'Text')
 
-    const userfarm: DB.UserFarmlandType = await DB.user_farmland
+    const userfarm = await DB.user_farmland
       .findOne({
         where: { uid: UID, id: Number(txt.replace(/(#|\/)?铲除/, '')) }
       })

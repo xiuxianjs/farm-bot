@@ -7,14 +7,14 @@ export default OnResponse(
     const txt = useParse(e.Megs, 'Text')
 
     const dataid = Number(txt.replace(/(#|\/)?浇水/, ''))
-    const formdata: DB.UserFarmlandType = (await DB.user_farmland.findOne({
+    const formdata: any = await DB.user_farmland.findOne({
       where: { uid: UID, id: dataid },
       include: [
         { model: DB.goods, as: 'goods_gid' },
         { model: DB.goods, as: 'goods_tid' }
       ],
       raw: true
-    })) as any
+    })
 
     const Send = useSend(e)
 

@@ -5,14 +5,14 @@ export default OnResponse(
     const UID = e.UserId
     if (!(await isThereAUserPresent(e, UID))) return
     // 我的农场
-    const farmNum: DB.UserFarmlandType[] = (await DB.user_farmland.findAll({
+    const farmNum: any[] = await DB.user_farmland.findAll({
       where: { uid: UID },
       raw: true,
       include: [
         { model: DB.goods, as: 'goods_gid' },
         { model: DB.goods, as: 'goods_tid' }
       ]
-    })) as any
+    })
 
     // 记录
     const log = []
